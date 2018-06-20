@@ -79,18 +79,31 @@
       const secondsDegrees = ((seconds / 60) * 360) + 90;
       const secondHand = document.querySelector(".second-hand");
       secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+      if((secondsDegrees - 90) % 360 === 0) {
+        secondHand.style.transition = "0s";
+      } else {
+        secondHand.style.transition = "0.05s";
+      }
 
       const minutes = now.getMinutes() + (seconds / 60);
       const minutesDegrees = ((minutes / 60) * 360) + 90;
       const minuteHand = document.querySelector(".minute-hand");
       minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+      if((minutesDegrees - 90) % 360 === 0) {
+        minuteHand.style.transition = "0s";
+      } else {
+        minuteHand.style.transition = "0.05s";
+      }
 
       const hours = now.getHours() + (minutes / 60);
       const hoursDegreees = ((hours / 12) * 360) + 90;
       const hourHand = document.querySelector(".hour-hand");
       hourHand.style.transform = `rotate(${hoursDegreees}deg)`;
-
-      console.log(seconds);
+      if((hoursDegreees - 90) % 360 === 0) {
+        hourHand.style.transition = "0s";
+      } else {
+        hourHand.style.transition = "0.05s";
+      }
     }
   </script>
 </body>
