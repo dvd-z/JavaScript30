@@ -1,19 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>HTML5 Canvas</title>
 </head>
-<body>
-<canvas id="draw" width="800" height="800"></canvas>
-<script>
-</script>
 
-<style>
-  html, body {
-    margin:0;
-  }
-</style>
+<body>
+  <canvas id="draw" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.querySelector('#draw');
+    const context = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
+    context.lineWidth = 100;
+
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let hue = 0;
+    let increaseWidth = false;
+
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseout', () => isDrawing = false);
+
+    function draw(e) {
+      if (!isDrawing) {
+        return;
+      }
+      if (hue >= 360) {
+        hue %= 360;
+      }
+      console.log(hue);
+      context.strokeStyle = `hsl(${hue++}, 100%, 50%)`;
+
+      context.beginPath();
+      // start point
+      context.moveTo(lastX, lastY);
+      // end point
+      context.lineTo(e.offsetX, e.offsetY);
+      context.stroke();
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+
+      if (context.lineWidth > 100 || context.lineWidth < 10) {
+        increaseWidth = !increaseWidth;
+      }
+
+      if (increaseWidth) {
+        context.lineWidth++;
+      } else {
+        context.lineWidth--;
+      }
+    }
+  </script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+    }
+  </style>
 
 </body>
+
 </html>
