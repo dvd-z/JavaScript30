@@ -105,13 +105,25 @@
 
     function handleCheck(e) {
       let inBetween = false;
-      if (e.shiftKey && this.checked) {
+      if (e.shiftKey) {
         checkboxes.forEach(checkbox => {
           if (checkbox === this || checkbox === lastChecked) {
             inBetween = !inBetween;
+            // fixes last checkbox not being checked/unchecked correctly
+            if (!inBetween) {
+              if (this.checked) {
+                lastChecked.checked = true;
+              } else {
+                lastChecked.checked = false;
+              }
+            }
           }
           if (inBetween) {
-            checkbox.checked = true;
+            if (this.checked) {
+              checkbox.checked = true;
+            } else {
+              checkbox.checked = false;
+            }
           }
         });
       }
