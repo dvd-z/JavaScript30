@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Reference VS Copy</title>
 </head>
+
 <body>
 
   <script>
@@ -41,17 +43,18 @@
     // So, how do we fix this? We take a copy instead!
     const team2 = players.slice();
 
-    // one day
+    // one way
 
     // or create a new array and concat the old one in
     const team3 = [].concat(players);
 
+    // or use Array.from
+    const team4 = Array.from(players);
+
     // or use the new ES6 Spread
-    const team4 = [...players];
+    const team5 = [...players];
     team4[3] = 'heeee hawww';
     console.log(team4);
-
-    const team5 = Array.from(players);
 
     // now when we update it, the original one isn't changed
 
@@ -96,4 +99,5 @@
   </script>
 
 </body>
+
 </html>
