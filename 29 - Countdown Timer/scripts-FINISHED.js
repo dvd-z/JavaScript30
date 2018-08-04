@@ -15,7 +15,7 @@ function timer(seconds) {
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
     // check if we should stop it!
-    if(secondsLeft < 0) {
+    if (secondsLeft < 0) {
       clearInterval(countdown);
       return;
     }
@@ -27,7 +27,7 @@ function timer(seconds) {
 function displayTimeLeft(seconds) {
   const minutes = Math.floor(seconds / 60);
   const remainderSeconds = seconds % 60;
-  const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
+  const display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
   document.title = display;
   timerDisplay.textContent = display;
 }
@@ -46,7 +46,7 @@ function startTimer() {
 }
 
 buttons.forEach(button => button.addEventListener('click', startTimer));
-document.customForm.addEventListener('submit', function(e) {
+document.customForm.addEventListener('submit', function (e) {
   e.preventDefault();
   const mins = this.minutes.value;
   console.log(mins);
